@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Add Vehicle</title>
+</head>
+<script>
+function xhttpRequest(type,request,url,callback){
+    const xhttp=new XMLHttpRequest();
+    xhttp.open(type,"https://javapr-cf.cfapps.io/vehicle"+url,true)
+    xhttp.setRequestHeader("Content-type","application/json")
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","http://localhost:8083/vehicle")
+    xhttp.send(JSON.stringify(request));
+    
+    
+        xhttp.onreadystatechange=(e)=>{
+            
+            if (xhttp.readyState == 4 && xhttp.status == 200){
+            callback(JSON.parse(xhttp.responseText));
+        }
+
+}}
+function addvch(){
+    const name=document.getElementById('vname').value;
+    const number =document.getElementById('vnum').value;
+    const oname=document.getElementById('oname').value;
+    const color=document.getElementById('vcolor').value;
+    const addr=document.getElementById('oaddr').value;
+    
+    const reg=document.getElementById('reg').value;
+    const year=document.getElementById('year').value;
+    const belong=document.getElementById('belong').value;
+    const model=document.getElementById('model').value;
+xhttpRequest('POST',{name,number,oname,color,addr,reg,belong,model,year},'',(resp)=>{
+    
+   console.log(resp)
+})
+alert("Vehicle added succesfully");
+
+}
+</script>
+<body>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
+        <div class="container">
+          
+          <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav">
+                
+              
+             <li class="nav-item">
+                <a href="index.html" class="nav-link" >Search</a>
+              </li>
+              <li class="nav-item">
+                <a href="add.html" class="nav-link">Add</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="delete.html" class="nav-link">Delete</a>
+              </li>
+              <li class="nav-item">
+                <a href="update.html" class="nav-link">Update</a>
+              </li>
+              
+              
+            </ul>
+            <ul class="navbar-nav ml-auto">
+    
+            
+                
+                <
+            </ul>
+          </div><!--end of collapse-->
+        </div><!--end of container-->
+      </nav>
+  <section id="showcase">
+    <div class="d-flex align-items-center primary-overlay text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 offset-2">
+            <div class="card text-center border-primary">
+                <div class="card-body">
+                    <h1 class="text-primary pb-3">
+                        Enter Vehicle Details
+                      </h1>
+                      <!-- const name=document.getElementById('vname').value;
+                      const number =document.getElementById('vnum').value;
+                      const oname=document.getElementById('oname').value;
+                      const color=document.getElementById('vcolor').value;
+                      const aadr=document.getElementById('oaddr').value;
+                      
+                      const reg=document.getElementById('reg').value;
+                      const belong=document.getElementById('belong').value;
+                      const year=document.getElementById('year').value
+                      const model=document.getElementById('model').value; -->
+                      <div class="row">
+                        <div class="col-md-6 col-xm-4">
+                          <input type="text" id="vname" class="form-control form-control-lg mb-resp" placeholder="VechName"/>
+                        </div>
+                        <div class="col-md-6  col-xm-4">
+                          <input type="text" id="vnum" class="form-control form-control-lg mb-resp" placeholder="VechNo" />
+                        </div>
+                      </div><!--End of row-->
+                      <input type="text" id="vcolor" class="form-control form-control-lg mb-resp" placeholder="Color"  />
+                      <div class="row">
+                          <div class="col-md-6  col-xm-4">
+                              <input type="text" id="belong" class="form-control form-control-lg mb-resp" placeholder="Brand Name" />
+                          </div>
+                          <div class="col-md-6  col-xm-4">
+                            <input type="text" id="oname" class="form-control form-control-lg mb-resp" placeholder="Owner Name" />
+                          </div>
+                    </div>
+                    <input type="text" id="reg" class="form-control form-control-lg mb-resp" placeholder="Reg No:" />
+                    <div class="row">
+                        <div class="col-md-6  col-xm-4">
+                          <input type="text" id="year" class="form-control form-control-lg mb-resp" placeholder="Year of purchase" />
+                          </div>
+                          <div class="col-md-6  col-xm-4">
+                            <input type="text" id="oaddr" class="form-control form-control-lg mb-resp" placeholder="Address" />
+                        </div>
+                        <div class="col-md-6  col-xm-4">
+                            <input type="text" id="model" class="form-control form-control-lg mb-resp" placeholder="Model" />
+                        </div>
+                      </div>
+                            
+                     <br>
+                      <div class="row">
+                        <div class="col-md-12">
+                            <button onclick="addvch();" class="btn btn-outline-primary">Submit</button>
+                        </div>
+                      </div>
+                  
+                </div><!--end of card-body-->
+              </div><!-- end of card-->
+            </div><!-- end of col-md-8-->
+          </div><!-- end of row-->
+        </div><!-- end of container-->
+      </div><!-- end of d-flex-->
+  </section>
+
+  
+  <!-- FOOTER -->
+  <footer id="main-footer" class="py-5 bg-primary text-white">
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-12">
+          <p class="lead">
+            Copyright &copy;2019</p>
+        </div><!-- end of col-md-12-->
+      </div><!-- end of row-->
+    </div><!-- end of container-->
+  </footer>
+
+
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+  
+</body>
+
+</html>

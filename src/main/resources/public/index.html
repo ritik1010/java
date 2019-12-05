@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Vehicle Details</title>
+</head>
+
+
+<script >
+function xhttpRequest(type,request,url,callback){
+    const xhttp=new XMLHttpRequest();
+    xhttp.open(type,"https://javapr-cf.cfapps.io/vehicle"+url,true)
+    xhttp.setRequestHeader("Content-type","application/json")
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","http://localhost:8083/")
+    xhttp.send(JSON.stringify(request));
+    
+    
+        xhttp.onreadystatechange=(e)=>{
+            
+            if (xhttp.readyState == 4 && xhttp.status == 200){
+            callback(JSON.parse(xhttp.responseText));
+        }
+
+}}
+function search(){
+
+const val=document.getElementById('search').value;
+const on=document.getElementById('onsearch').value;
+xhttpRequest("GET",{},"/search/findBy"+on+"?"+on.toLowerCase()+"="+val,(res)=>{
+for(var i=0;i<5;i++){
+    document.getElementById(i+1).style="visibility:collapse";
+}
+  const resp=res._embedded.vehicle
+console.log(res._embedded.vehicle)
+for(var i=0;i<resp.length;i++){
+  document.getElementById(i+1).style="visibility:visible";
+  document.getElementById((i+1)+"Number").innerText=resp[i].number;
+  document.getElementById((i+1)+"Name").innerText=resp[i].name;
+  document.getElementById((i+1)+"Brand").innerText=resp[i].belong;
+  document.getElementById((i+1)+"Oname").innerText=resp[i].oname;
+  document.getElementById((i+1)+"year").innerText=resp[i].year;
+  document.getElementById((i+1)+"model").innerText=resp[i].model;
+  document.getElementById((i+1)+"color").innerText=resp[i].color;
+  document.getElementById((i+1)+'reg').innerText=resp[i].reg;
+  document.getElementById((i+1)+"addr").innerText=resp[i].addr;
+
+
+}
+})
+}
+function place(resp){
+
+}</script>
+
+
+<body id="home" style="margin-top: 105px;">
+
+  <!-- Navigation -->
+
+  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
+    <div class="container">
+      
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav">
+            
+          
+          
+          <li class="nav-item">
+            <a href="index.html" class="nav-link" >Search</a>
+          </li>
+          <li class="nav-item">
+            <a href="add.html" class="nav-link">Add</a>
+          </li>
+          
+          <li class="nav-item">
+            <a href="delete.html" class="nav-link">Delete</a>
+          </li>
+          <li class="nav-item">
+            <a href="update.html" class="nav-link">Update</a>
+          </li>
+          
+        </ul>
+        <ul class="navbar-nav ml-auto">
+
+        
+            
+            <
+        </ul>
+      </div><!--end of collapse-->
+    </div><!--end of container-->
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          
+              <input type="text" size="20" height="5" maxlength="100" id="search">
+              <button  onclick="search();" >Search</button>
+              
+              Select Criteria for Search
+              <select id="onsearch">
+  <option value="Color">Color</option>
+  <option value="Oname">Owner Name</option>
+  <option value="Year">Year</option>
+  <option value="Name">Vehicle Name</option>
+  <option value="Number">Vehicle Number</option>
+  <option value="Addr">City</option>
+</select>
+          
+      </div>
+    </div>
+  </div>
+  <section id="posts">
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="card">
+              <div class="card-header">
+                <h4>Vehicle Details</h4>
+              </div>
+              <table class="table table-striped">
+                <thead class="thead">
+                  <tr>
+                    
+                    <th>VehicelNumber</th>
+                    <th>VehicleName</th>
+                    <th>VehicleBrand</th>
+                    <th>VehicleOwnerName</th>
+                    <th>BoughtOnYear</th>
+                    <th>City </th>
+                    <th>Vehicle Color</th>
+                    <th>Vehicle Model</th>
+                    <th>Reg Number</th>
+                    
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr id="1" style="visibility: collapse;">
+                    
+                    <td id="1Number"></td>
+                    <td id="1Name"></td>
+                    <td id="1Brand"></td>
+                    <td id="1Oname"></td>
+                    <td id="1year"></td>
+                    <td id="1addr"></td>
+                    <td id="1color"></td>
+                    <td id="1model"></td>
+                    <td id="1reg"></td>
+                    
+                  </tr>
+                  <tr id="2" style="visibility: collapse;">
+                    
+
+                    <td id="2Number"></td>
+                    <td id="2Name"></td>
+                    <td id="2Brand"></td>
+                    <td id="2Oname"></td>
+                    <td id="2year"></td>
+                    <td id="2addr"></td>
+
+                    <td id="2color"></td>
+                    <td id="2model"></td>
+                    <td id="2reg"></td>
+
+                  </tr>
+                    <tr id="3" style="visibility: collapse;">
+                        
+
+                        <td id="3Number"></td>
+                        <td id="3Name"></td>
+                        <td id="3Brand"></td>
+                        <td id="3Oname"></td>
+                        <td id="3year"></td>
+                        <td id="3addr"></td>
+
+                        <td id="3color"></td>
+                        <td id="3model"></td>
+                        <td id="3reg"></td>
+                  </tr>
+                      <tr id="4" style="visibility: collapse;">
+                        <td id="4Number"></td>
+                        <td id="4Name"></td>
+                        <td id="4Brand"></td>
+                        <td id="4Oname"></td>
+                        <td id="4year"></td>
+                        <td id="4addr"></td>
+
+                        <td id="4color"></td>
+                        <td id="4model"></td>
+                        <td id="4reg"></td>
+                  </tr>
+                        <tr id="5" style="visibility: collapse;">
+                            <td id="5Number"></td>
+                            <td id="5Name"></td>
+                            <td id="5Brand"></td>
+                            <td id="5Oname"></td>
+                            <td id="5year"></td>
+                            <td id="5addr"></td>
+
+                            <td id="5color"></td>
+                            <td id="5model"></td>
+                            <td id="5reg"></td>
+                  </tr>
+                          <tr id="6" style="visibility: collapse;">
+                            <td id="6Number"></td>
+                            <td id="6Name"></td>
+                            <td id="6Brand"></td>
+                            <td id="6Oname"></td>
+                            <td id="6year"></td>
+                            <td id="6addr"></td>
+
+                            <td id="6color"></td>
+                            <td id="6model"></td>
+                            <td id="6reg"></td>
+                  </tr>
+                  <tr id="point7" style="visibility: collapse;">
+                    <td id="7Number"></td>
+                    <td id="7Name"></td>
+                    <td id="7Brand"></td>
+                    <td id="7Oname"></td>
+                    <td id="7year"></td>
+                    <td id="7addr"></td>
+
+                    <td id="7color"></td>
+                    <td id="7model"></td>
+                    <td id="7reg"></td>
+          </tr>
+          <tr id="point8" style="visibility: collapse;">
+            <td id="8Number"></td>
+            <td id="8Name"></td>
+            <td id="8Brand"></td>
+            <td id="8Oname"></td>
+            <td id="8year"></td>
+            <td id="8addr"></td>
+
+            <td id="8color"></td>
+            <td id="8reg"></td>
+  </tr>
+  <tr id="point9" style="visibility: collapse;">
+    <td id="9Number"></td>
+    <td id="9Name"></td>
+    <td id="9Brand"></td>
+    <td id="9Oname"></td>
+    <td id="9year"></td>
+    <td id="9addr"></td>
+
+    <td id="9color"></td>
+    <td id="9reg"></td>
+</tr>
+                </tbody>
+              </table>
+  
+              <!-- Next Page -->
+              <nav class="ml-4">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <a href="#" class="page-link">Previous</a>
+                  </li>
+                  <li class="page-item active">
+                    <a href="#" class="page-link">1</a>
+                  </li>
+                  <li class="page-item">
+                    <a href="#" class="page-link">2</a>
+                  </li>
+                  <li class="page-item">
+                    <a href="#" class="page-link">3</a>
+                  </li>
+                  <li class="page-item">
+                    <a href="#" class="page-link">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+
+  <!-- Footer -->
+  <footer id="main-footer" class="py-5 bg-primary text-white">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-12">
+            <p class="lead">
+              Copyright &copy;2019</p>
+          </div><!-- end of col-md-12-->
+        </div><!-- end of row-->
+      </div><!-- end of container-->
+    </footer>
+  
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+  
+</body>
+
+</html>

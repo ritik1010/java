@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="bootstrap.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Vehicle Details</title>
+</head>
+
+
+<script >
+function xhttpRequest(type,request,url,callback){
+    const xhttp=new XMLHttpRequest();
+    xhttp.open(type,"http://localhost:8083/vehicle"+url,true)
+    xhttp.setRequestHeader("Content-type","application/json")
+    xhttp.setRequestHeader("Access-Control-Allow-Origin","http://localhost:8083/")
+    xhttp.send(JSON.stringify(request));
+    
+    
+        xhttp.onreadystatechange=(e)=>{
+            
+            if (xhttp.readyState == 4 && xhttp.status == 200){
+            callback(JSON.parse(xhttp.responseText));
+        }
+
+}}
+function delete(){
+	const num=document.getElementById("num").value();
+	alert("Vehicle with Number"+ num+"is deleted");
+	
+	
+
+
+
+}
+})
+}
+function place(resp){
+
+}</script>
+
+
+<body id="home" style="margin-top: 105px;">
+
+  <!-- Navigation -->
+
+  <nav class="navbar navbar-expand-md navbar-light fixed-top py-4" id="main-nav">
+    <div class="container">
+      
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav">
+            
+          
+          
+          <<li class="nav-item">
+                <a href="index.html" class="nav-link" >Search</a>
+              </li>
+              <li class="nav-item">
+                <a href="add.html" class="nav-link">Add</a>
+              </li>
+              
+              <li class="nav-item">
+                <a href="delete.html" class="nav-link">Delete</a>
+              </li>
+              <li class="nav-item">
+                <a href="update.html" class="nav-link">Update</a>
+              </li>
+              
+        </ul>
+        <ul class="navbar-nav ml-auto">
+
+        
+            
+            <
+        </ul>
+      </div><!--end of collapse-->
+    </div><!--end of container-->
+  </nav>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          
+              <input type="text" size="20" height="5" maxlength="100" id="num" placeholder="Enter Vehicle Number you want to delete">
+              <button  onclick="delete();" >Delete</button>
+              
+    
+                
+
+  <!-- Footer -->
+  <footer id="main-footer" class="py-5 bg-primary text-white">
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-md-12">
+            <p class="lead">
+              Copyright &copy;2019</p>
+          </div><!-- end of col-md-12-->
+        </div><!-- end of row-->
+      </div><!-- end of container-->
+    </footer>
+  
+  <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+
+  
+</body>
+
+</html>
